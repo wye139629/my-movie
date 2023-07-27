@@ -28,7 +28,7 @@ const NavLink = ({
   return (
     <Link
       href={url}
-      className="flex h-full items-center space-x-2 text-white text-sm"
+      className="flex h-full items-center space-x-2 text-gray-100 text-sm"
     >
       <span className="w-4">{icon ? icon : null}</span>
       <span className="hidden md:block">{title}</span>
@@ -40,11 +40,14 @@ export default function Navbar() {
   const id = useId();
 
   return (
-    <header className="bg-mv-black">
+    <header className="bg-mv-black/50">
       <nav className="block h-[72px] px-8">
         <div className="flex h-full space-x-10">
           <div>
-            <Link href="/" className="flex h-full items-center text-2xl">
+            <Link
+              href="/"
+              className="flex h-full items-center text-2xl md:text-4xl"
+            >
               <span className="text-white">My</span>
               <span className="text-mv-blue-dark">Movie</span>
             </Link>

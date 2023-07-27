@@ -9,7 +9,7 @@ export default function MovieThumbnail({
   return (
     <div className="relative h-32 min-w-[260px] cursor-pointer">
       <Image
-        src={`${config.imageEndpoint}${backgroudPath}`}
+        src={`${config.imageEndpoint}/w500${backgroudPath}`}
         alt="movie-img"
         fill
         sizes="(min-width: 180px) 260px, (max-width: 268px) 50vw, 33vw"

@@ -38,7 +38,7 @@ export default function MovieRow({ category, children }: MovieRowProps) {
       <h2>{category}</h2>
       <div className="relative">
         <button
-          className="group p-2 absolute top-0 bottom-0 left-0 my-auto opacity-60 hover:bg-gray-800 z-10"
+          className="group p-2 absolute top-0 bottom-0 left-0 my-auto opacity-60 hover:bg-gray-800/40 z-10"
           onClick={goPrevious}
         >
           <ChevronLeftIcon className="hidden w-8 h-8 group-hover:block" />
@@ -51,7 +51,7 @@ export default function MovieRow({ category, children }: MovieRowProps) {
           {children}
         </ul>
         <button
-          className="group p-2 absolute top-0 bottom-0 right-0 my-auto opacity-60 hover:bg-gray-800 z-10"
+          className="group p-2 absolute top-0 bottom-0 right-0 my-auto hover:bg-gray-800/40 z-10"
           onClick={goNext}
         >
           <ChevronRightIcon className="hidden w-8 h-8 group-hover:block" />

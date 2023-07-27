@@ -8,6 +8,7 @@ import {
   getUpcomingMovies,
 } from "@/lib/api";
 import MovieThumbnail from "./components/MovieThumbnail";
+import Banner from "./components/Banner";
 
 async function getMoviesByCategory(fetcher: typeof getPopularMovies) {
   try {
@@ -16,7 +17,10 @@ async function getMoviesByCategory(fetcher: typeof getPopularMovies) {
 
     return movies.map((movie) => ({
       id: movie.id,
-      backgroudPath: movie.backdrop_path || movie.poster_path,
+      title: movie.title,
+      overview: movie.overview,
+      backDropPath: movie.backdrop_path,
+      posterPath: movie.poster_path,
     }));
   } catch (error) {
     // This will activate the closest `error.js` Error Boundary
@@ -37,28 +41,24 @@ export default async function Home() {
       topRatedPromise,
       upcomingPromise,
     ]);
+  const bannerMovie =
+    nowPlayingMovies[Math.floor(Math.random() * nowPlayingMovies.length)];
 
   return (
     <main className="min-h-screen justify-between">
+      <Banner
+        id={bannerMovie.id}
+        title={bannerMovie.title}
+        overview={bannerMovie.overview}
+        backgroundPath={bannerMovie.backDropPath}
+      />
       <div>
         <Suspense fallback={<div>Loading...</div>}>
           <MovieRow category="Now Playing">
-            {nowPlayingMovies.map(({ id, backgroudPath }, index) => (
+            {nowPlayingMovies.map(({ id, backDropPath, posterPath }, index) => (
               <li key={index}>
                 <Link href={`/movie/${id}`}>
-                  <MovieThumbnail backgroudPath={backgroudPath} />
-                </Link>
-              </li>
-            ))}
-          </MovieRow>
-        </Suspense>
-
-        <Suspense fallback={<div>Loading...</div>}>
-          <MovieRow category="Popular">
-            {popularMovies.map(({ id, backgroudPath }, index) => (
-              <li key={index}>
-                <Link href={`/movie/${id}`}>
-                  <MovieThumbnail backgroudPath={backgroudPath} />
+                  <MovieThumbnail backgroudPath={backDropPath || posterPath} />
                 </Link>
               </li>
             ))}
@@ -67,10 +67,10 @@ export default async function Home() {
 
         <Suspense fallback={<div>Loading...</div>}>
           <MovieRow category="Upcoming">
-            {upcomingMovies.map(({ id, backgroudPath }, index) => (
+            {upcomingMovies.map(({ id, backDropPath, posterPath }, index) => (
               <li key={index}>
                 <Link href={`/movie/${id}`}>
-                  <MovieThumbnail backgroudPath={backgroudPath} />
+                  <MovieThumbnail backgroudPath={backDropPath || posterPath} />
                 </Link>
               </li>
             ))}
@@ -79,10 +79,22 @@ export default async function Home() {
 
         <Suspense fallback={<div>Loading...</div>}>
           <MovieRow category="Top Rated">
-            {topRatedMovies.map(({ id, backgroudPath }, index) => (
+            {topRatedMovies.map(({ id, backDropPath, posterPath }, index) => (
               <li key={index}>
                 <Link href={`/movie/${id}`}>
-                  <MovieThumbnail backgroudPath={backgroudPath} />
+                  <MovieThumbnail backgroudPath={backDropPath || posterPath} />
+                </Link>
+              </li>
+            ))}
+          </MovieRow>
+        </Suspense>
+
+        <Suspense fallback={<div>Loading...</div>}>
+          <MovieRow category="Popular">
+            {popularMovies.map(({ id, backDropPath, posterPath }, index) => (
+              <li key={index}>
+                <Link href={`/movie/${id}`}>
+                  <MovieThumbnail backgroudPath={backDropPath || posterPath} />
                 </Link>
               </li>
             ))}
