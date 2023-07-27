@@ -19,3 +19,7 @@
 body {
   background: linear-gradient(to right, #06060c, #1e2230, #1e2230, #06060c);
 }
+
+.disable-scrollbar::-webkit-scrollbar {
+  display: none;
+}
