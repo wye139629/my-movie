@@ -10,7 +10,7 @@ export default function Footer() {
             className="flex h-full items-center text-2xl md:text-3xl"
           >
             <span className="text-white">My</span>
-            <span className="text-mv-blue-dark">Movie</span>
+            <span className="text-mv-blue-100">Movie</span>
           </Link>
         </div>
         <p>© 2023 This is only for demo</p>

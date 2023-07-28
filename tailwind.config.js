@@ -9,8 +9,9 @@ module.exports = {
     extend: {
       colors: {
         "mv-black": "#060507",
-        "mv-blue-light": "#03e7f5",
-        "mv-blue-dark": "#025d97",
+        "mv-blue-100": "#03e7f5",
+        "mv-blue-500": "#025d97",
+        "mv-blue-900": "#2c2e3a",
         "mv-bg": "#1c1f2e",
       },
       backgroundImage: {

@@ -125,7 +125,7 @@ export function PaginationList<T>({
           <li onClick={goPrevious}>
             <a
               href="#"
-              className="flex items-center justify-center px-3 h-8 ml-0 leading-tight rounded-l-lg border cursor-pointer hover:bg-mv-blue-dark"
+              className="flex items-center justify-center px-3 h-8 ml-0 leading-tight rounded-l-lg border cursor-pointer hover:bg-mv-blue-500"
             >
               <ChevronLeftIcon className="w-4 h-4" />
             </a>
@@ -139,7 +139,7 @@ export function PaginationList<T>({
             >
               <a
                 href="#"
-                className={`flex items-center justify-center px-3 h-8 leading-tight border hover:bg-mv-blue-dark cursor-pointer ${page === currentPageIdx + 1 && "bg-mv-blue-dark"
+                className={`flex items-center justify-center px-3 h-8 leading-tight border hover:bg-mv-blue-500 cursor-pointer ${page === currentPageIdx + 1 && "bg-mv-blue-500"
                   }`}
               >
                 {page}
@@ -149,7 +149,7 @@ export function PaginationList<T>({
           <li onClick={goNext}>
             <a
               href="#"
-              className="flex items-center justify-center px-3 h-8 ml-0 leading-tight rounded-r-lg border cursor-pointer hover:bg-mv-blue-dark"
+              className="flex items-center justify-center px-3 h-8 ml-0 leading-tight rounded-r-lg border cursor-pointer hover:bg-mv-blue-500"
             >
               <ChevronRightIcon className="w-4 h-4" />
             </a>

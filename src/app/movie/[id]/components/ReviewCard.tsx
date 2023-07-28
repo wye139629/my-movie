@@ -8,7 +8,7 @@ export function ReviewCard({ review }: { review: Review }) {
   const grayStars = 5 - yellowStars;
 
   return (
-    <div className="border-mv-black border rounded-lg  p-4 mb-4 bg-mv-black/50 shadow shadow-gray-500">
+    <div className="border-mv-blue-900 border rounded-lg  p-4 mb-4 bg-mv-blue-900/70 shadow-md shadow-gray-900">
       <div className="flex items-center mb-2 space-x-4">
         <div className="space-y-1 font-medium">
           <p>{review.author}</p>
@@ -33,7 +33,7 @@ export function ReviewCard({ review }: { review: Review }) {
         {review.content}
       </p>
       <span
-        className={`block mb-5 text-sm font-medium text-mv-blue-light cursor-pointer `}
+        className={`block mb-5 text-sm font-medium text-mv-blue-100 cursor-pointer `}
         onClick={() => {
           setIsExpand(!isExpand);
         }}
