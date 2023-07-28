@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import Link from "next/link";
 import MovieRow from "./components/MovieRow";
 import {
@@ -53,53 +52,45 @@ export default async function Home() {
         backgroundPath={bannerMovie.backDropPath}
       />
       <div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <MovieRow category="Now Playing">
-            {nowPlayingMovies.map(({ id, backDropPath, posterPath }, index) => (
-              <li key={index}>
-                <Link href={`/movie/${id}`}>
-                  <MovieThumbnail backgroudPath={backDropPath || posterPath} />
-                </Link>
-              </li>
-            ))}
-          </MovieRow>
-        </Suspense>
+        <MovieRow category="Now Playing">
+          {nowPlayingMovies.map(({ id, backDropPath, posterPath }, index) => (
+            <li key={index}>
+              <Link href={`/movie/${id}`}>
+                <MovieThumbnail backgroudPath={backDropPath || posterPath} />
+              </Link>
+            </li>
+          ))}
+        </MovieRow>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <MovieRow category="Upcoming">
-            {upcomingMovies.map(({ id, backDropPath, posterPath }, index) => (
-              <li key={index}>
-                <Link href={`/movie/${id}`}>
-                  <MovieThumbnail backgroudPath={backDropPath || posterPath} />
-                </Link>
-              </li>
-            ))}
-          </MovieRow>
-        </Suspense>
+        <MovieRow category="Upcoming">
+          {upcomingMovies.map(({ id, backDropPath, posterPath }, index) => (
+            <li key={index}>
+              <Link href={`/movie/${id}`}>
+                <MovieThumbnail backgroudPath={backDropPath || posterPath} />
+              </Link>
+            </li>
+          ))}
+        </MovieRow>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <MovieRow category="Top Rated">
-            {topRatedMovies.map(({ id, backDropPath, posterPath }, index) => (
-              <li key={index}>
-                <Link href={`/movie/${id}`}>
-                  <MovieThumbnail backgroudPath={backDropPath || posterPath} />
-                </Link>
-              </li>
-            ))}
-          </MovieRow>
-        </Suspense>
+        <MovieRow category="Top Rated">
+          {topRatedMovies.map(({ id, backDropPath, posterPath }, index) => (
+            <li key={index}>
+              <Link href={`/movie/${id}`}>
+                <MovieThumbnail backgroudPath={backDropPath || posterPath} />
+              </Link>
+            </li>
+          ))}
+        </MovieRow>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <MovieRow category="Popular">
-            {popularMovies.map(({ id, backDropPath, posterPath }, index) => (
-              <li key={index}>
-                <Link href={`/movie/${id}`}>
-                  <MovieThumbnail backgroudPath={backDropPath || posterPath} />
-                </Link>
-              </li>
-            ))}
-          </MovieRow>
-        </Suspense>
+        <MovieRow category="Popular">
+          {popularMovies.map(({ id, backDropPath, posterPath }, index) => (
+            <li key={index}>
+              <Link href={`/movie/${id}`}>
+                <MovieThumbnail backgroudPath={backDropPath || posterPath} />
+              </Link>
+            </li>
+          ))}
+        </MovieRow>
       </div>
     </main>
   );

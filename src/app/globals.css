@@ -23,3 +23,9 @@ body {
 .disable-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+@layer components {
+  .movie-tab-link {
+    @apply inline-block text-sm md:text-xl p-4 border-b-[4px] border-transparent rounded-t-lg hover:border-white;
+  }
+}

@@ -1,6 +1,12 @@
 import axios from "axios";
 import envConfig from "@/config";
-import { RawMovie } from "./types";
+import {
+  RawMovieDetail,
+  RawMovie,
+  RawMovieCredits,
+  RawMovieVideos,
+  RawMovieReviews,
+} from "./types";
 
 const request = axios.create({
   baseURL: envConfig.apiEndpoint,
@@ -73,4 +79,20 @@ export const getUpcomingMovies = async (
   results: Array<RawMovie>;
 }> => {
   return request.get(`/movie/upcoming?page=${page}`);
+};
+
+export const getMovie = async (id: string): Promise<RawMovieDetail> => {
+  return request.get(`/movie/${id}`);
+};
+
+export const getMovieCredits = async (id: string): Promise<RawMovieCredits> => {
+  return request.get(`/movie/${id}/credits`);
+};
+
+export const getMovieVideos = async (id: string): Promise<RawMovieVideos> => {
+  return request.get(`/movie/${id}/videos`);
+};
+
+export const getMovieReviews = async (id: string): Promise<RawMovieReviews> => {
+  return request.get(`/movie/${id}/reviews`);
 };
