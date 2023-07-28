@@ -110,3 +110,17 @@ export type RawMovieReviews = {
     url: string;
   }>;
 };
+
+export type RawSearchMovies = {
+  page: number;
+  results: Array<RawMovie>;
+  total_pages: number;
+  total_results: number;
+};
+
+export type RawDiscoverMovies = {
+  page: number;
+  results: Array<RawMovie>;
+  total_pages: number;
+  total_results: number;
+};

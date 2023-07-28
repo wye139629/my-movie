@@ -6,6 +6,8 @@ import {
   RawMovieCredits,
   RawMovieVideos,
   RawMovieReviews,
+  RawSearchMovies,
+  RawDiscoverMovies,
 } from "./types";
 
 const request = axios.create({
@@ -95,4 +97,20 @@ export const getMovieVideos = async (id: string): Promise<RawMovieVideos> => {
 
 export const getMovieReviews = async (id: string): Promise<RawMovieReviews> => {
   return request.get(`/movie/${id}/reviews`);
+};
+
+export const searchMovies = async ({
+  query = "",
+  page = 1,
+}: {
+  query: string;
+  page?: number;
+}): Promise<RawSearchMovies> => {
+  return request.get(`/search/movie?query=${query}&page=${page}`);
+};
+
+export const discoverMovies = async (
+  page: number,
+): Promise<RawDiscoverMovies> => {
+  return request.get(`/discover/movie?page=${page}`);
 };

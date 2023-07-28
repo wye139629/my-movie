@@ -10,8 +10,8 @@ export default function ReviewList({ reviews }: { reviews: Review[] }) {
       data={reviews}
       pageSize={5}
       total={reviews.length}
-      renderItem={(item, key) => {
-        return <ReviewCard key={key} review={item} />;
+      renderItem={(item) => {
+        return <ReviewCard review={item} />;
       }}
     />
   );
