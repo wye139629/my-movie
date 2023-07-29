@@ -31,13 +31,13 @@ export default function MovieCard({ movie }: { movie: Movie }) {
       </Link>
       <span
         className={`${
-          !isAddToList && "hidden"
+          !isAddToList && "lg:hidden"
         } group-hover:block rounded-full bg-black text-black border-white border w-fit hover:bg-mv-blue-500 absolute bottom-1 right-1 cursor-pointer ${
           isAddToList && "bg-mv-blue-500"
         }`}
         onClick={toggle}
       >
-        <PlusIcon className="text-white w-8 h-8 " />
+        <PlusIcon className="text-white w-6 h-6 md:w-8 md:h-8 " />
       </span>
     </div>
   );

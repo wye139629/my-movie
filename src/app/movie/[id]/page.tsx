@@ -45,10 +45,12 @@ export default async function Layout({ params }: { params: { id: string } }) {
     <main>
       <div className="absolute top-0 left-0 -z-10 h-[100vh] w-full">
         <Image
+          priority
+          className="object-cover"
           src={`${config.imageEndpoint}/original${movie.backdropPath}`}
           fill
-          objectFit="cover"
-          alt="movie-banner"
+          alt={`${movie.title}-banner"`}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
       <div className="flex flex-col space-y-2 bg-mv-black/50 text-white py-20 md:py-32 px-10 min-h-[80vh]">

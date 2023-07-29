@@ -9,11 +9,11 @@ export default function MovieThumbnail({
   return (
     <div className="relative h-32 min-w-[260px] cursor-pointer">
       <Image
+        className="rounded-sm md:rounded object-cover"
         src={`${config.imageEndpoint}/w500${backgroundPath}`}
         alt="movie-img"
         fill
-        sizes="(min-width: 180px) 260px, (max-width: 268px) 50vw, 33vw"
-        className="rounded-sm md:rounded object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
     </div>
   );

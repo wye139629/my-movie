@@ -20,9 +20,10 @@ export default function Banner({
     <section className="text-white flex flex-col space-y-2 px-10 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12">
       <div className="absolute top-0 left-0 -z-10 h-[92vh] w-full">
         <Image
+          priority
+          className="object-cover"
           src={`${config.imageEndpoint}/original${backgroundPath}`}
           fill
-          objectFit="cover"
           alt="banner-img"
         />
       </div>
