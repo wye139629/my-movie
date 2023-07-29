@@ -45,7 +45,7 @@ export default function Navbar() {
         <div className="flex h-full space-x-10">
           <div>
             <Link
-              href="/"
+              href="/home"
               className="flex h-full items-center text-2xl md:text-4xl"
             >
               <span className="text-white">My</span>

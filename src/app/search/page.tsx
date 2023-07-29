@@ -70,7 +70,9 @@ export default function SearchPage() {
       <section className="text-white px-12 min-h-[80vh] md:px-24">
         <div className="space-y-4 pt-4 pb-2 px-2">
           {!query && (
-            <h2 className="text-xl md:text-2xl">Discover your movie</h2>
+            <h2 className="text-xl text-center md:text-2xl md:text-left">
+              Discover your movie
+            </h2>
           )}
           <div className="flex space-x-2">
             <button
@@ -114,14 +116,13 @@ export default function SearchPage() {
               }}
               renderItem={({ id, backdrop_path, poster_path }) => {
                 return (
-                  <Link
-                    href={`/movie/${id}`}
-                    className="block relative min-w-[260px] p-2"
-                  >
-                    <MovieThumbnail
-                      backgroudPath={backdrop_path || poster_path}
-                    />
-                  </Link>
+                  <div className="group relative p-2">
+                    <Link href={`/movie/${id}`}>
+                      <MovieThumbnail
+                        backgroundPath={backdrop_path || poster_path}
+                      />
+                    </Link>
+                  </div>
                 );
               }}
             />

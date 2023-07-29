@@ -1,22 +1,11 @@
 import Image from "next/image";
-import { PlusIcon } from "@heroicons/react/24/solid";
 import { getMovie } from "@/lib/api";
 import config from "@/config";
 import MovieDetails from "./components/MovieDetails";
 import MovieIntro from "./components/MovieIntro";
 import MovieVideoList from "./components/MovieVideoList";
 import MovieReviews from "./components/MovieReviews";
-
-export type Movie = {
-  id: string;
-  title: string;
-  overview: string;
-  runtime: number;
-  genres: Array<{ id: number; name: string }>;
-  backdropPath: string;
-  posterPath: string;
-  releaseDate: string;
-};
+import { ButtonGruop } from "./components/ButtonGroup";
 
 const getMovieDetail = async (movieId: string) => {
   try {
@@ -29,6 +18,7 @@ const getMovieDetail = async (movieId: string) => {
       release_date,
       backdrop_path,
       poster_path,
+      popularity,
     } = await getMovie(movieId);
 
     return {
@@ -37,6 +27,7 @@ const getMovieDetail = async (movieId: string) => {
       overview,
       runtime,
       genres,
+      popularity,
       backdropPath: backdrop_path,
       posterPath: poster_path,
       releaseDate: release_date,
@@ -78,9 +69,17 @@ export default async function Layout({ params }: { params: { id: string } }) {
               </span>
             </p>
           </div>
-          <span className="block rounded-full bg-black text-black border-white border-2 w-fit">
-            <PlusIcon className="text-white w-10 h-10" />
-          </span>
+          <ButtonGruop
+            movie={{
+              id: movie.id,
+              title: movie.title,
+              overview: movie.overview,
+              backDropPath: movie.backdropPath,
+              posterPath: movie.posterPath,
+              releaseDate: movie.releaseDate,
+              popularity: movie.popularity,
+            }}
+          />
         </section>
         <MovieDetails
           introContent={

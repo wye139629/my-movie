@@ -1,4 +1,3 @@
-import Link from "next/link";
 import MovieRow from "./components/MovieRow";
 import {
   getNowPlayingMovies,
@@ -6,8 +5,8 @@ import {
   getTopRatedMoives,
   getUpcomingMovies,
 } from "@/lib/api";
-import MovieThumbnail from "./components/MovieThumbnail";
 import Banner from "./components/Banner";
+import MovieCard from "./components/MovieCard";
 
 async function getMoviesByCategory(fetcher: typeof getPopularMovies) {
   try {
@@ -15,11 +14,13 @@ async function getMoviesByCategory(fetcher: typeof getPopularMovies) {
     const movies = data.results;
 
     return movies.map((movie) => ({
-      id: movie.id,
+      id: String(movie.id),
       title: movie.title,
       overview: movie.overview,
       backDropPath: movie.backdrop_path,
       posterPath: movie.poster_path,
+      releaseDate: movie.release_date,
+      popularity: movie.popularity,
     }));
   } catch (error) {
     // This will activate the closest `error.js` Error Boundary
@@ -53,41 +54,33 @@ export default async function Home() {
       />
       <div>
         <MovieRow category="Now Playing">
-          {nowPlayingMovies.map(({ id, backDropPath, posterPath }, index) => (
+          {nowPlayingMovies.map((movie, index) => (
             <li key={index}>
-              <Link href={`/movie/${id}`}>
-                <MovieThumbnail backgroudPath={backDropPath || posterPath} />
-              </Link>
+              <MovieCard movie={movie} />
             </li>
           ))}
         </MovieRow>
 
         <MovieRow category="Upcoming">
-          {upcomingMovies.map(({ id, backDropPath, posterPath }, index) => (
+          {upcomingMovies.map((movie, index) => (
             <li key={index}>
-              <Link href={`/movie/${id}`}>
-                <MovieThumbnail backgroudPath={backDropPath || posterPath} />
-              </Link>
+              <MovieCard movie={movie} />
             </li>
           ))}
         </MovieRow>
 
         <MovieRow category="Top Rated">
-          {topRatedMovies.map(({ id, backDropPath, posterPath }, index) => (
+          {topRatedMovies.map((movie, index) => (
             <li key={index}>
-              <Link href={`/movie/${id}`}>
-                <MovieThumbnail backgroudPath={backDropPath || posterPath} />
-              </Link>
+              <MovieCard movie={movie} />
             </li>
           ))}
         </MovieRow>
 
         <MovieRow category="Popular">
-          {popularMovies.map(({ id, backDropPath, posterPath }, index) => (
+          {popularMovies.map((movie, index) => (
             <li key={index}>
-              <Link href={`/movie/${id}`}>
-                <MovieThumbnail backgroudPath={backDropPath || posterPath} />
-              </Link>
+              <MovieCard movie={movie} />
             </li>
           ))}
         </MovieRow>

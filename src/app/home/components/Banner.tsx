@@ -4,7 +4,7 @@ import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import config from "@/config";
 
 type BannerProps = {
-  id: number;
+  id: string;
   title: string;
   overview: string;
   backgroundPath: string;
