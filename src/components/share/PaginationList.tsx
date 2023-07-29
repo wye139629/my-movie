@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { SpinAnime } from "./";
 
 type PaginationListProps<T> = {
@@ -47,23 +47,24 @@ export function PaginationList<T>({
   const totalPages = Math.ceil(total / pageSize);
   const [currentPageIdx, setCurrentPageIdx] = useState(0);
   const [pageList, setPageList] = useState(() => calcPageList(totalPages));
-  const dataWithPages = useMemo(() => {
-    let currentPageIdxTemp = currentPageIdx;
-    let result = new Array(totalPages);
 
+  const dataWithPages = useMemo(() => {
     if (!data || !totalPages) {
       return [];
     }
 
+    let currentPageIdxTemp = data.length === total ? 0 : currentPageIdx;
+    let result = new Array(totalPages);
+
     return data.reduce(
       (acc, curr) => {
-        if (!acc[currentPageIdx]) {
-          acc[currentPageIdx] = [curr];
+        if (!acc[currentPageIdxTemp]) {
+          acc[currentPageIdxTemp] = [curr];
         } else {
-          acc[currentPageIdx].push(curr);
+          acc[currentPageIdxTemp].push(curr);
         }
 
-        if (acc[currentPageIdx].length === pageSize) {
+        if (acc[currentPageIdxTemp].length === pageSize) {
           currentPageIdxTemp++;
         }
 
@@ -71,9 +72,9 @@ export function PaginationList<T>({
       },
       result as Array<Array<T>>,
     );
-  }, [data, totalPages, pageSize, currentPageIdx]);
+  }, [data, totalPages, pageSize, currentPageIdx, total]);
 
-  const noData = dataWithPages.length === 0;
+  const noData = dataWithPages.length === 0 || !dataWithPages[currentPageIdx];
 
   function mutatePageList(nextPageIdx: number) {
     const nextPage = nextPageIdx + 1;
@@ -154,7 +155,7 @@ export function PaginationList<T>({
   }
 
   return (
-    <div className="relative pb-10">
+    <div className="relative pb-10 min-h-[500px]">
       <div>
         {isLoading || noData ? (
           <div className="min-h-[400px] flex justify-center items-center">
