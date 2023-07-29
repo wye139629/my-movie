@@ -75,11 +75,13 @@ export function MovieLotteryModal() {
 
             <div className="p-6 space-y-6 flex-grow">
               <div className="flex items-center w-full h-full">
-                {summonStatus === "pending" && <QuestionMarkCircleIcon />}
+                {movies.length !== 0 && summonStatus === "pending" && (
+                  <QuestionMarkCircleIcon />
+                )}
 
                 {movies.length === 0 ? (
                   <p className="w-full text-center">
-                    Please add some movies to the wathing list first
+                    Please add some movies to the watching list first!
                   </p>
                 ) : (
                   movies.map((movie, idx) => {
