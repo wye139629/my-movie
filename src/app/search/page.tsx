@@ -5,8 +5,7 @@ import { ChangeEvent, useState, useMemo } from "react";
 import useSWR from "swr";
 import { debounce } from "@/utils/debounce";
 import { PaginationList } from "@/components/share";
-import MovieThumbnail from "../home/components/MovieThumbnail";
-import Link from "next/link";
+import MovieCard from "../home/components/MovieCard";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
@@ -114,14 +113,28 @@ export default function SearchPage() {
               onPageChange={(page) => {
                 setPage(page);
               }}
-              renderItem={({ id, backdrop_path, poster_path }) => {
+              renderItem={({
+                id: movieId,
+                title,
+                overview,
+                popularity,
+                backdrop_path: backDropPath,
+                poster_path: posterPath,
+                release_date: releaseDate,
+              }) => {
                 return (
-                  <div className="group relative p-2">
-                    <Link href={`/movie/${id}`}>
-                      <MovieThumbnail
-                        backgroundPath={backdrop_path || poster_path}
-                      />
-                    </Link>
+                  <div className="p-2">
+                    <MovieCard
+                      movie={{
+                        id: String(movieId),
+                        title,
+                        overview,
+                        popularity,
+                        backDropPath,
+                        posterPath,
+                        releaseDate,
+                      }}
+                    />
                   </div>
                 );
               }}

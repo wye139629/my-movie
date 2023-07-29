@@ -12,7 +12,10 @@ export type Movie = {
   genres?: Array<{ id: number; name: string }>;
 };
 
-type SortMovieOption = "release_date" | "popularity";
+type SortMovieOption = {
+  type: "release_date" | "popularity";
+  order: "desc" | "asc";
+};
 
 type UserMovieListState = {
   movies: Array<Movie>;
@@ -24,7 +27,7 @@ type UserMovieListState = {
 
 export const useUserMoiveListStore = create<UserMovieListState>()((set) => ({
   movies: [],
-  sortOption: "release_date",
+  sortOption: { type: "release_date", order: "desc" },
   addToList: (movie) => set((state) => ({ movies: [...state.movies, movie] })),
   removeFromList: (id) =>
     set((state) => ({
