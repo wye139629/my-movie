@@ -1,17 +1,17 @@
 "use client";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { SpinAnime } from "./";
 
 type PaginationListProps<T> = {
   data: Array<T> | undefined;
-  direction: "vertical" | "horizontal";
   total: number;
   pageSize: number;
   renderItem: (item: T) => React.ReactElement;
   isLoading?: boolean;
   onPageChange?: (page: number) => void;
+  direction?: "vertical" | "horizontal";
   rowKey?: string;
   skeletonLayout?: React.ReactElement;
 };
