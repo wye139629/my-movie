@@ -74,7 +74,7 @@ export default function Page() {
               renderItem={(movie) => {
                 return (
                   <div className="p-2">
-                    <MovieCard movie={movie} />
+                    <MovieCard movie={movie} width="w-full" />
                   </div>
                 );
               }}

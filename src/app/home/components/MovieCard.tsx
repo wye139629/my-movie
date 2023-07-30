@@ -1,27 +1,27 @@
 "use client";
 
+import { MouseEvent } from "react";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import MovieThumbnail from "./MovieThumbnail";
 import { Movie, useUserMoiveListStore } from "@/stores/movies";
-import { MouseEvent } from "react";
 
 type MovieCardProps = {
   movie: Movie;
-  width?: number;
-  height?: number;
+  width?: string;
+  height?: string;
 };
 
 function getReleaseYear(releaseDate: string) {
   return releaseDate.split("-")[0];
 }
 
-export default function MovieCard({
-  movie,
-  width = 260,
-  height = 180,
-}: MovieCardProps) {
+export default function MovieCard({ movie, width, height }: MovieCardProps) {
   const { id, backDropPath, posterPath } = movie;
+  const size = {
+    width: width ? width : "w-[260px]",
+    height: height ? height : "h-[180px]",
+  };
   const addToMovieList = useUserMoiveListStore((state) => state.addToList);
   const removeFromList = useUserMoiveListStore((state) => state.removeFromList);
 
@@ -43,7 +43,7 @@ export default function MovieCard({
   }
 
   return (
-    <li className={`w-[${width}px] h-[${height}px]`}>
+    <li className={`${size.width} ${size.height}`}>
       <Link
         href={`/movie/${id}`}
         className="block h-full bg-mv-blue-900 shadow-lg shadow-black/80 rounded overflow-hidden"

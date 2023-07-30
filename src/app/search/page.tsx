@@ -125,6 +125,7 @@ export default function SearchPage() {
                 return (
                   <div className="p-2">
                     <MovieCard
+                      width="w-full"
                       movie={{
                         id: String(movieId),
                         title,

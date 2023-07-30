@@ -14,7 +14,7 @@ export default function MovieThumbnail({
   return (
     <div className="relative h-32 min-w-[260px] cursor-pointer">
       <Image
-        className="object-cover"
+        className="object-cover object-top"
         src={
           !isError
             ? `${config.imageEndpoint}/w500${backgroundPath}`
