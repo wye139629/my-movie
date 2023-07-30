@@ -162,7 +162,7 @@ export function PaginationList<T>({
             {skeletonLayout}
           </div>
         ) : (
-          <div
+          <ul
             className={`${
               direction === "horizontal" &&
               "grid grid-cols-1 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 xl:grid xl:grid-cols-4"
@@ -173,7 +173,7 @@ export function PaginationList<T>({
 
               return <div key={key as string}>{renderItem(item)}</div>;
             })}
-          </div>
+          </ul>
         )}
       </div>
 

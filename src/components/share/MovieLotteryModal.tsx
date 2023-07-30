@@ -74,9 +74,9 @@ export function MovieLotteryModal() {
             </div>
 
             <div className="p-6 space-y-6 flex-grow">
-              <div className="flex items-center w-full h-full">
+              <div className="flex justify-center items-center w-full h-full">
                 {movies.length !== 0 && summonStatus === "pending" && (
-                  <QuestionMarkCircleIcon />
+                  <QuestionMarkCircleIcon className="w-100 y-100 md:w-200 md:y-200" />
                 )}
 
                 {movies.length === 0 ? (

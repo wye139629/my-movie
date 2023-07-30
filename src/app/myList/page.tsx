@@ -2,12 +2,10 @@
 
 import { MovieLotteryModal, PaginationList } from "@/components/share";
 import { useUserMoiveListStore } from "@/stores/movies";
-import MovieThumbnail from "../home/components/MovieThumbnail";
-import Link from "next/link";
-import { InboxIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { InboxIcon } from "@heroicons/react/24/solid";
+import MovieCard from "../home/components/MovieCard";
 
 export default function Page() {
-  const removeFromList = useUserMoiveListStore((state) => state.removeFromList);
   const { type: sortType, order } = useUserMoiveListStore(
     (state) => state.sortOption,
   );
@@ -21,7 +19,7 @@ export default function Page() {
 
         return bTime - aTime;
       } else {
-        return (b.popularity = a.popularity);
+        return b.popularity - a.popularity;
       }
     });
   });
@@ -73,20 +71,10 @@ export default function Page() {
               pageSize={12}
               total={sortedMovies.length}
               rowKey="id"
-              renderItem={({ id, backDropPath, posterPath }) => {
+              renderItem={(movie) => {
                 return (
-                  <div className="relative p-2">
-                    <Link href={`/movie/${id}`} className="relative w-[260px]">
-                      <MovieThumbnail
-                        backgroundPath={backDropPath || posterPath}
-                      />
-                    </Link>
-                    <span
-                      className={`group-hover:block rounded-full bg-black text-black border-white border w-fit absolute top-4 right-4 cursor-pointer`}
-                      onClick={() => removeFromList(id)}
-                    >
-                      <XMarkIcon className="text-white w-5 h-5" />
-                    </span>
+                  <div className="p-2">
+                    <MovieCard movie={movie} />
                   </div>
                 );
               }}

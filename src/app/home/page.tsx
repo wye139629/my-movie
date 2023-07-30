@@ -55,33 +55,25 @@ export default async function Home() {
       <div>
         <MovieRow category="Now Playing">
           {nowPlayingMovies.map((movie, index) => (
-            <li key={index}>
-              <MovieCard movie={movie} />
-            </li>
+            <MovieCard key={index} movie={movie} />
           ))}
         </MovieRow>
 
         <MovieRow category="Upcoming">
           {upcomingMovies.map((movie, index) => (
-            <li key={index}>
-              <MovieCard movie={movie} />
-            </li>
+            <MovieCard key={index} movie={movie} />
           ))}
         </MovieRow>
 
         <MovieRow category="Top Rated">
           {topRatedMovies.map((movie, index) => (
-            <li key={index}>
-              <MovieCard movie={movie} />
-            </li>
+            <MovieCard key={index} movie={movie} />
           ))}
         </MovieRow>
 
         <MovieRow category="Popular">
           {popularMovies.map((movie, index) => (
-            <li key={index}>
-              <MovieCard movie={movie} />
-            </li>
+            <MovieCard key={index} movie={movie} />
           ))}
         </MovieRow>
       </div>
