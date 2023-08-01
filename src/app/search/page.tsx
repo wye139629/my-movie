@@ -1,11 +1,12 @@
 "use client";
 
-import { discoverMovies, searchMovies } from "@/lib/api";
+import { endpoints, request } from "@/lib/api";
 import { ChangeEvent, useState, useMemo } from "react";
 import useSWR from "swr";
 import { debounce } from "@/utils/debounce";
 import { PaginationList } from "@/components/share";
 import MovieCard from "../home/components/MovieCard";
+import { RawDiscoverMovies, RawSearchMovies } from "@/lib/api/types";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
@@ -15,13 +16,16 @@ export default function SearchPage() {
   );
 
   const { data: discoverMoviesData, isLoading: isDiscoverMovieDataLoading } =
-    useSWR({ url: "/dicover/movies", page }, ({ page }) =>
-      discoverMovies(page),
+    useSWR(
+      { url: endpoints.DISCOVER, page },
+      ({ url, page }): Promise<RawDiscoverMovies> =>
+        request.get(url, { params: { page } }),
     );
 
   const { data, isLoading } = useSWR(
-    query ? { query, page } : null,
-    ({ query, page }) => searchMovies({ query, page }),
+    query ? { url: endpoints.SEARCH, query, page } : null,
+    ({ url, query, page }): Promise<RawSearchMovies> =>
+      request.get(url, { params: { query, page } }),
   );
 
   const displayData = query ? data : discoverMoviesData;

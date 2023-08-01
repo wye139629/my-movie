@@ -1,5 +1,6 @@
-import { getMovieReviews } from "@/lib/api";
+import { endpoints, request } from "@/lib/api";
 import ReviewList from "./ReviewList";
+import { RawMovieReviews } from "@/lib/api/types";
 
 export type Review = {
   author: string;
@@ -11,7 +12,9 @@ export type Review = {
 
 const getReviews = async (movieId: string): Promise<Review[]> => {
   try {
-    const { results } = await getMovieReviews(movieId);
+    const { results }: RawMovieReviews = await request.get(
+      endpoints.MOVIE.DETAIL(movieId, "reviews"),
+    );
 
     return results.map(({ author, author_details, content, created_at }) => ({
       author: author || author_details?.name || author_details?.username,

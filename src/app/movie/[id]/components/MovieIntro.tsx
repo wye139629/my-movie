@@ -1,4 +1,5 @@
-import { getMovieCredits } from "@/lib/api";
+import { endpoints, request } from "@/lib/api";
+import { RawMovieCredits } from "@/lib/api/types";
 
 type MovieIntroProps = {
   id: string;
@@ -16,7 +17,9 @@ type MovieStaffs = {
 
 const getMovieStaffs = async (movieId: string): Promise<MovieStaffs> => {
   try {
-    const { cast, crew } = await getMovieCredits(movieId);
+    const { cast, crew }: RawMovieCredits = await request(
+      endpoints.MOVIE.DETAIL(movieId, "credits"),
+    );
 
     return {
       directors: crew

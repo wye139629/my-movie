@@ -1,16 +1,24 @@
 import MovieRow from "./components/MovieRow";
-import {
-  getNowPlayingMovies,
-  getPopularMovies,
-  getTopRatedMoives,
-  getUpcomingMovies,
-} from "@/lib/api";
+import { endpoints, request } from "@/lib/api";
 import Banner from "./components/Banner";
 import MovieCard from "./components/MovieCard";
+import { RawMovie } from "@/lib/api/types";
 
-async function getMoviesByCategory(fetcher: typeof getPopularMovies) {
+async function getMoviesByCategory(url: string) {
   try {
-    const data = await fetcher();
+    const data: {
+      total_pages: number;
+      total_results: number;
+      page: number;
+      results: Array<RawMovie>;
+      dates?: {
+        maximum: string;
+        minimum: string;
+      };
+    } = await request.get(url, {
+      params: { page: 1 },
+    });
+
     const movies = data.results;
 
     return movies.map((movie) => ({
@@ -29,10 +37,18 @@ async function getMoviesByCategory(fetcher: typeof getPopularMovies) {
 }
 
 export default async function Home() {
-  const nowPlayingPromise = getMoviesByCategory(getNowPlayingMovies);
-  const popularPromise = getMoviesByCategory(getPopularMovies);
-  const topRatedPromise = getMoviesByCategory(getTopRatedMoives);
-  const upcomingPromise = getMoviesByCategory(getUpcomingMovies);
+  const nowPlayingPromise = getMoviesByCategory(
+    endpoints.MOVIE.BY_CATEGORY("now_playing"),
+  );
+  const popularPromise = getMoviesByCategory(
+    endpoints.MOVIE.BY_CATEGORY("popular"),
+  );
+  const topRatedPromise = getMoviesByCategory(
+    endpoints.MOVIE.BY_CATEGORY("top_rated"),
+  );
+  const upcomingPromise = getMoviesByCategory(
+    endpoints.MOVIE.BY_CATEGORY("upcoming"),
+  );
 
   const [nowPlayingMovies, popularMovies, topRatedMovies, upcomingMovies] =
     await Promise.all([

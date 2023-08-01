@@ -1,11 +1,12 @@
 import Image from "next/image";
-import { getMovie } from "@/lib/api";
+import { endpoints, request } from "@/lib/api";
 import config from "@/config";
 import MovieDetails from "./components/MovieDetails";
 import MovieIntro from "./components/MovieIntro";
 import MovieVideoList from "./components/MovieVideoList";
 import MovieReviews from "./components/MovieReviews";
 import { ButtonGruop } from "./components/ButtonGroup";
+import { RawMovieDetail } from "@/lib/api/types";
 
 const getMovieDetail = async (movieId: string) => {
   try {
@@ -19,7 +20,7 @@ const getMovieDetail = async (movieId: string) => {
       backdrop_path,
       poster_path,
       popularity,
-    } = await getMovie(movieId);
+    }: RawMovieDetail = await request.get(endpoints.MOVIE.BY_ID(movieId));
 
     return {
       id: String(id),

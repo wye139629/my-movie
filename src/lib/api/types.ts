@@ -1,3 +1,11 @@
+export type MovieDetailType = "credits" | "videos" | "reviews";
+
+export type MovieCategory =
+  | "now_playing"
+  | "popular"
+  | "upcoming"
+  | "top_rated";
+
 export type RawMovie = {
   adult: boolean;
   backdrop_path: string;
