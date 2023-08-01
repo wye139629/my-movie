@@ -17,19 +17,16 @@ type PaginationListProps<T> = {
 };
 
 function calcPageList(totalPages: number) {
+  const defaultPages = [1, 2, 3, 4, 5];
+
   if (!totalPages) {
-    return [1, 2, 3, 4, 5];
+    return defaultPages;
   }
 
   if (totalPages >= 5) {
-    return [1, 2, 3, 4, 5];
+    return defaultPages;
   } else {
-    const result = [];
-    for (let index = 0; index < totalPages; index++) {
-      result[index] = index + 1;
-    }
-
-    return result;
+    return defaultPages.slice(0, totalPages);
   }
 }
 
@@ -48,33 +45,22 @@ export function PaginationList<T>({
   const [currentPageIdx, setCurrentPageIdx] = useState(0);
   const [pageList, setPageList] = useState(() => calcPageList(totalPages));
 
-  const dataWithPages = useMemo(() => {
-    if (!data || !totalPages) {
+  const displayData = useMemo(() => {
+    if (!data) {
       return [];
     }
 
-    let currentPageIdxTemp = data.length === total ? 0 : currentPageIdx;
-    let result = new Array(totalPages);
+    if (data.length === pageSize) {
+      return data;
+    }
 
-    return data.reduce(
-      (acc, curr) => {
-        if (!acc[currentPageIdxTemp]) {
-          acc[currentPageIdxTemp] = [curr];
-        } else {
-          acc[currentPageIdxTemp].push(curr);
-        }
+    const displayStartIdx = pageSize * currentPageIdx;
+    const displayEndIdx = displayStartIdx + pageSize;
 
-        if (acc[currentPageIdxTemp].length === pageSize) {
-          currentPageIdxTemp++;
-        }
+    return data.slice(displayStartIdx, displayEndIdx);
+  }, [pageSize, data, currentPageIdx]);
 
-        return acc;
-      },
-      result as Array<Array<T>>,
-    );
-  }, [data, totalPages, pageSize, currentPageIdx, total]);
-
-  const noData = dataWithPages.length === 0 || !dataWithPages[currentPageIdx];
+  const noData = displayData.length === 0;
 
   function mutatePageList(nextPageIdx: number) {
     const nextPage = nextPageIdx + 1;
@@ -168,7 +154,7 @@ export function PaginationList<T>({
               "grid grid-cols-1 md:grid md:grid-cols-2 lg:grid lg:grid-cols-3 xl:grid xl:grid-cols-4"
             }`}
           >
-            {dataWithPages[currentPageIdx].map((item, idx) => {
+            {displayData.map((item, idx) => {
               const key = rowKey ? item[rowKey as keyof T] : idx;
 
               return <div key={key as string}>{renderItem(item)}</div>;
